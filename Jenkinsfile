@@ -89,7 +89,21 @@ pipeline{
                 }           
                 
             }
-        }        
+        }
+
+        stage('Maven Build : Project') {
+
+         when { expression { params.action == 'create' } }
+
+            steps{
+
+                script{
+
+                    mvnbuild()
+                }           
+                
+            }
+        }                
 
     }
 }
