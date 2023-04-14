@@ -32,5 +32,23 @@ pipeline{
                 }
             }
         }
+
+        stage('Unit Test maven') {
+
+         when { expression { params.action == 'create' } }
+
+            steps{
+
+                script{
+
+                    mvntest()
+                }           
+                
+            }
+        }
+
+
+
+
     }
 }
