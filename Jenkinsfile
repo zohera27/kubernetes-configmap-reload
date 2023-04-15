@@ -17,6 +17,8 @@ pipeline{
 
         stage('GIT CheckOut'){
 
+         when { expression {params.action == 'Create'} }
+
             steps{
 
                 script{
@@ -38,7 +40,19 @@ pipeline{
 
         }
 
+        stage('Maven Unit Testing'){
 
+         when { expression {params.action == 'Create'} }
+
+            steps{
+
+                script{
+
+                    mvntest()
+                }
+            }
+
+        }
 
     }
 
