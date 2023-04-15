@@ -48,7 +48,7 @@ pipeline{
 
                 script{
 
-                    mvntest()
+                    maven.mvntest()
                 }
             }
 
@@ -62,7 +62,7 @@ pipeline{
 
                 script{
 
-                    mvnintegration()
+                    maven.mvnverify()
                 }
             }
         }
