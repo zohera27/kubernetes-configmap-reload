@@ -54,9 +54,9 @@ pipeline{
 
         }
 
-        stage('Maven UnitIntegration Test'){
+        stage('Maven Integration Test'){
 
-         when { expression {params.action == 'Create'} }    
+         when { expression { params.action == 'Create' } }    
 
             steps{
 
