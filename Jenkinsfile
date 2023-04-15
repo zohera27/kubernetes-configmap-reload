@@ -1,4 +1,4 @@
-@Library('Jenkins Shared Library') _
+@Library('Jenkins_Shared_Library') _
 
 pipeline{
 
@@ -15,15 +15,17 @@ pipeline{
 
     stages{
 
+     when { expression { params.action == 'Create' } }
+
         stage{
 
             script{
 
                 gitcheckout(
 
-                    branch: 'main'
+                    branch: "main"
 
-                    url: 'https://github.com/zohera27/kubernetes-configmap-reload.git'
+                    url: "https://github.com/zohera27/kubernetes-configmap-reload.git"
 
 
                 )
