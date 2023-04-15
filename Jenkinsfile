@@ -23,7 +23,7 @@ pipeline{
 
                 gitcheckout(
 
-                    branch: "main"
+                    branch: "main",
 
                     url: "https://github.com/zohera27/kubernetes-configmap-reload.git"
 
