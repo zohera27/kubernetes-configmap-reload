@@ -54,6 +54,19 @@ pipeline{
 
         }
 
+        stage('Maven UnitIntegration Test'){
+
+         when { expression {params.action == 'Create'} }    
+
+            steps{
+
+                script{
+
+                    mvnintegration()
+                }
+            }
+        }
+
     }
 
 
