@@ -15,31 +15,20 @@ pipeline{
 
     stages{
 
-        stage('GIT CheckOut') {
+        stage('Git Checkout') {
 
-         when { expression { params.action == 'Create' } }
+         when { expression { params.action == 'create' } }
 
             steps{
 
                 script{
 
-                    gitcheckout(
-
-                    branch: "main",
-
-                    url: "https://github.com/zohera27/kubernetes-configmap-reload.git"
-
-
+                    gitCheckout(
+                        branch: "main",
+                        url: "https://github.com/zohera27/devops_Java_Project.git"
                     )
-
                 }
-
-
-                
-
             }
-
-
         }
 
 
