@@ -4,6 +4,13 @@ pipeline{
 
     agent any
 
+    environment{
+
+        SONARQUBE_SERVERURL = 'http://192.168.2.104:9000'
+        SONARQUBE_PROJECT_KEY = 'com.minikube.sample:kubernetes-configmap-reload'
+        SONARQUBE_TOKEN = credentials('sonar-api')
+    }
+
     parameters{
 
         choice( name: 'action', choices: 'Create\nDelete', description: 'Choose the Action Create/Delete' )
@@ -67,6 +74,35 @@ pipeline{
             }
         }
 
+        stage("SonarQube Static Code Analysis"){
+
+         when { expression {params.action == 'Create' } }
+
+            steps{
+
+                script{
+
+                    def SonarQUbeCredentialId = 'sonar-api'
+                    maven.codeanalysis(SonarQUbeCredentialId)
+                }
+            }             
+                     
+        }
+
+        stage('Delete SonarQube project') {
+         
+         when { expression {params.action == 'Create' } }
+            
+            steps {
+
+                def SonarQUbeCredentialId = 'sonar-api'
+                sh "curl -u ${SONARQUBE_TOKEN} -X POST ${SONARQUBE_SERVER_URL}/api/projects/delete?project=${SONARQUBE_PROJECT_KEY}"
+                maven.codeclean(SonarQUbeCredentialId)
+
+            }
+
+            
+        }
     }
 
 
