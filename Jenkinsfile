@@ -3,7 +3,7 @@
 def mavenhome = '/opt/apache-maven-3.9.1/bin'
 def toolchain = '/opt/apache-maven-3.9.1/conf'
 def SONARQUBE_TOKEN = credentials('sonar-api')
-def SONARQUBE_SERVER_URL = 'https://192.168.2.104:9000'
+def SONARQUBE_SERVER_URL = 'http://192.168.2.104:9000'
 def PROJECT_KEY = 'com.minikube.sample:kubernetes-configmap-reload'
 
 pipeline {
