@@ -73,7 +73,7 @@ pipeline{
 
                 script{
 
-                    maven.mvnverify()
+                    maven.mvnverify(mavenhome, toolchain)
                 }
             }
         }
@@ -87,7 +87,7 @@ pipeline{
                 script{
 
                     def SonarQUbeCredentialId = 'sonar-api'
-                    maven.codeanalysis(SonarQUbeCredentialId)
+                    maven.codeanalysis(SonarQUbeCredentialId, mavenhome, toolchain)
                 }
             }             
                      
@@ -103,7 +103,7 @@ pipeline{
 
                     def SonarQUbeCredentialId = 'sonar-api'
                     sh "curl -u ${SONARQUBE_TOKEN} -X POST ${SONARQUBE_SERVER_URL}/api/projects/delete?project=${SONARQUBE_PROJECT_KEY}"
-                    maven.codeclean(SonarQUbeCredentialId)
+                    maven.codeclean(SonarQUbeCredentialId, mavenhome, toolchain)
                 }
             
             }
