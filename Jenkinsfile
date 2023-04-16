@@ -37,7 +37,7 @@ pipeline {
             }    
         }
 
-        stage('GIT Checkout') {
+        stage('GIT Checking') {
 
          when { expression { params.action == 'Delete' } }   
             
