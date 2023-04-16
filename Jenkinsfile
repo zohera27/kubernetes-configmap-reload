@@ -37,22 +37,7 @@ pipeline {
             }    
         }
 
-        stage('GIT Checking') {
-
-         when { expression { params.action == 'Delete' } }   
-            
-            steps {
-
-                script {
-            
-                    gitcheckout(
-
-                        branch: 'main',
-                        url: 'https://github.com/zohera27/kubernetes-configmap-reload.git'
-                    )
-                }    
-            }    
-        }
+        
     
         stage('Maven Test') {
 
@@ -110,19 +95,7 @@ pipeline {
             }
         }
 
-        stage("Delete SonarQube project") {
-         
-         when { expression {params.action == 'Delete' } }
-            
-            steps {
-                
-                script {
-                    
-                    sh "curl -X POST -u ${SONARQUBE_TOKEN}: ${SONARQUBE_SERVER_URL}/api/projects/delete?key=${PROJECT_KEY}"
-                }
-            }
-        }
-   
+        
     
     }    
 
