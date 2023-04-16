@@ -120,6 +120,20 @@ pipeline {
                 }
             }
         }
-    }    
+    
+        stage('Docker Push Image'){
+
+         when { expression { params.action == 'Create' } }    
+            steps{
+
+                script{
+
+                    docker.PushImage( "${params.ImageName}", "${params.ImageTag}", "${params.DockerHub}" )
+                }
+            }
+        }
+    
+    }
+        
 
 }
