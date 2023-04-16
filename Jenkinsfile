@@ -97,7 +97,7 @@ pipeline {
 
         stage('Docker Image Build'){
 
-         when { expression { params.action == 'create' } }
+         when { expression { params.action == 'Create' } }
 
             steps{
 
