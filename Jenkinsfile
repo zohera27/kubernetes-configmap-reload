@@ -91,7 +91,7 @@ pipeline{
 
         stage('Delete SonarQube project') {
          
-         when { expression {params.action == 'Create' } }
+         when { expression {params.action == 'Delete' } }
             
             steps {
 
