@@ -95,15 +95,16 @@ pipeline{
             
             steps {
 
-                def SonarQUbeCredentialId = 'sonar-api'
-                sh "curl -u ${SONARQUBE_TOKEN} -X POST ${SONARQUBE_SERVER_URL}/api/projects/delete?project=${SONARQUBE_PROJECT_KEY}"
-                maven.codeclean(SonarQUbeCredentialId)
+                script {
 
-            }
-
+                    def SonarQUbeCredentialId = 'sonar-api'
+                    sh "curl -u ${SONARQUBE_TOKEN} -X POST ${SONARQUBE_SERVER_URL}/api/projects/delete?project=${SONARQUBE_PROJECT_KEY}"
+                    maven.codeclean(SonarQUbeCredentialId)
+                }
             
+            }
+             
         }
     }
-
 
 }
