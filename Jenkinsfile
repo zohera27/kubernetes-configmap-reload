@@ -5,7 +5,7 @@ def toolchain = '/opt/apache-maven-3.9.1/conf'
 
 pipeline {
 
-    agents any
+    agent any
 
     parameters{
 
