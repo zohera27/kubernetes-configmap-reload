@@ -61,6 +61,19 @@ pipeline {
                 }    
             }    
         }
+
+        stage('SonarQube StaticCode Analysis'){
+
+
+            steps{
+
+                script{
+
+                    def SonarQubeCredentialId = 'sonar-api'
+                    sonarqube.staticcode(SonarQubeCredentialId, mavenhome, toolchain)
+                }
+            }
+        }
     
     }    
 
