@@ -64,6 +64,7 @@ pipeline {
 
         stage('SonarQube StaticCode Analysis'){
 
+         when { expression { params.action == 'Create' } }
 
             steps{
 
@@ -74,6 +75,22 @@ pipeline {
                 }
             }
         }
+
+        stage('SonarQube Quality Gate Status') {
+
+         when { expression { params.action == 'Create' } }
+         
+            steps{
+
+                script{
+
+                    def SonarQubeCredentialId = 'sonar-api'
+                    sonarqube.qualitygate(SonarQubeCredentialId)
+                }
+            }
+        }
+
+    
     
     }    
 
