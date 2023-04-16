@@ -15,7 +15,54 @@ pipeline {
         string( name: 'DockerHub', description: 'DockerHub User Account', defaultValue:'zohera27' )
     }
 
+    stages {
+
+        stage('GIT Checkout') {
+
+         when { expression { params.action == 'Create' } }   
+            
+            steps {
+
+                script {
+            
+                    gitcheckout(
+
+                        branch: 'main',
+                        url: 'https://github.com/zohera27/kubernetes-configmap-reload.git'
+                    )
+                }    
+            }    
+        }
     
+        stage('Maven Test') {
+
+         when { expression { params.action == 'Create' } }   
+            
+            steps {
+
+                script {
+            
+                    maven.mvntest()
+
+                }    
+            }    
+        }
+    
+        stage('Maven UnitTesting') {
+
+         when { expression { params.action == 'Create' } }   
+            
+            steps {
+
+                script {
+            
+                    maven.mvnverify()
+
+                }    
+            }    
+        }
+    
+    }    
 
 
 
