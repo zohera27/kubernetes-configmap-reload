@@ -95,8 +95,19 @@ pipeline {
             }
         }
 
-        
-    
+        stage('Docker Image Build'){
+
+         when { expression { params.action == 'create' } }
+
+            steps{
+
+                script{
+
+                    dockerbuild("${params.ImageName}", "${params.ImageTag}", "${params.DockerHub}")
+                }
+            }
+        }        
+
     }    
 
 }
