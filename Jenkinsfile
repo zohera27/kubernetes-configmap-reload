@@ -2,6 +2,9 @@
 
 def mavenhome = '/opt/apache-maven-3.9.1/bin'
 def toolchain = '/opt/apache-maven-3.9.1/conf'
+def SONARQUBE_TOKEN = credentials('sonar-api')
+def SONARQUBE_SERVER_URL = 'https://192.168.2.104:9000'
+def PROJECT_KEY = 'com.minikube.sample:kubernetes-configmap-reload'
 
 pipeline {
 
@@ -89,6 +92,20 @@ pipeline {
                 }
             }
         }
+
+        stage("Delete SonarQube project") {
+
+         when { expression {params.action == 'Delete' } }
+
+            steps {
+
+                script {
+                    
+                    sh "curl -X POST -u ${SONARQUBE_TOKEN}:'${SONARQUBE_SERVER_URL}/api/projects/delete?key=${PROJECT_KEY}'"
+                }
+            }
+        }
+
 
     
     
