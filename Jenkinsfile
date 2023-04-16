@@ -101,7 +101,7 @@ pipeline {
 
                 script {
                     
-                    sh "curl -X POST -u ${SONARQUBE_TOKEN}:'${SONARQUBE_SERVER_URL}/api/projects/delete?key=${PROJECT_KEY}'"
+                    sh "curl -X POST -u ${SONARQUBE_TOKEN}:${SONARQUBE_SERVER_URL}/api/projects/delete?key=${PROJECT_KEY}"
                 }
             }
         }
