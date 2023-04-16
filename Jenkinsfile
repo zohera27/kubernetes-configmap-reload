@@ -36,6 +36,23 @@ pipeline {
                 }    
             }    
         }
+
+        stage('GIT Checkout') {
+
+         when { expression { params.action == 'Delete' } }   
+            
+            steps {
+
+                script {
+            
+                    gitcheckout(
+
+                        branch: 'main',
+                        url: 'https://github.com/zohera27/kubernetes-configmap-reload.git'
+                    )
+                }    
+            }    
+        }
     
         stage('Maven Test') {
 
