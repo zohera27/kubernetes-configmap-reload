@@ -6,7 +6,7 @@ pipeline{
 
     environment{
 
-        SONARQUBE_SERVERURL = 'http://192.168.2.104:9000'
+        SONARQUBE_SERVER_URL = 'http://192.168.2.104:9000'
         SONARQUBE_PROJECT_KEY = 'com.minikube.sample:kubernetes-configmap-reload'
         SONARQUBE_TOKEN = credentials('sonar-api')
     }
