@@ -103,7 +103,7 @@ pipeline {
 
                 script{
 
-                    dockerbuild("${params.ImageName}", "${params.ImageTag}", "${params.DockerHub}")
+                    docker.build("${params.ImageName}", "${params.ImageTag}", "${params.DockerHub}")
                 }
             }
         }        
