@@ -42,7 +42,7 @@ pipeline {
 
                 script {
             
-                    maven.mvntest()
+                    maven.mvntest(mavenhome, toolchain)
 
                 }    
             }    
@@ -56,7 +56,7 @@ pipeline {
 
                 script {
             
-                    maven.mvnverify()
+                    maven.mvnverify(mavenhome, toolchain)
 
                 }    
             }    
