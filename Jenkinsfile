@@ -118,6 +118,7 @@ pipeline{
                 def projectKey = ''
                 withSonarQubeEnv(credentialsId: 'sonar-api') {
                     projectKey = sh script: "${mavenhome}/bin/mvn -Dmaven.toolchains.file=${toolchain} -Djdk-version=1.8 -B -e -T 1C sonar:sonar -Dsonar.projectKey=${env.SONARQUBE_PROJECT_KEY} -Dsonar.host.url=${env.SONARQUBE_HOST_URL} -Dsonar.login=${env.SONARQUBE_TOKEN} -Dsonar.analysis.mode=publish -Dsonar.github.oauth=${env.GITHUB_OAUTH} -s ${env.MAVEN_SETTINGS_XML} | grep 'ANALYSIS SUCCESSFUL, you can browse ' | awk \"{print \$9}\"", returnStdout: true
+                    println "SonarQube project key: ${projectKey.trim()}"
                 }
                 // Print the project key for verification
                 println "SonarQube project key: ${projectKey}"
