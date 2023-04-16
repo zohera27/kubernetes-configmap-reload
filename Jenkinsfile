@@ -6,7 +6,7 @@ def toolchain = "/opt/apache-maven-3.9.1/conf/toolchains.xml"
 pipeline{
 
     agent any
-
+    /*
     environment{
 
         SONARQUBE_SERVER_URL = 'http://192.168.2.104:9000'
@@ -14,7 +14,7 @@ pipeline{
         SONARQUBE_TOKEN = credentials('sonar-api')
         
     }
-
+    */
     parameters{
 
         choice( name: 'action', choices: 'Create\nDelete', description: 'Choose the Action Create/Delete' )
@@ -111,4 +111,17 @@ pipeline{
         }
     }
 
+    post {
+        always {
+            script {
+                // Save the project key to a global variable
+                def projectKey = ''
+                withSonarQubeEnv(credentialsId: 'sonar-api') {
+                    projectKey = sh script: "mvn -B -e -T 1C sonar:sonar -Dsonar.projectKey=${env.SONARQUBE_PROJECT_KEY} -Dsonar.host.url=${env.SONARQUBE_HOST_URL} -Dsonar.login=${env.SONARQUBE_TOKEN} -Dsonar.analysis.mode=publish -Dsonar.github.oauth=${env.GITHUB_OAUTH} -s ${env.MAVEN_SETTINGS_XML} | grep 'ANALYSIS SUCCESSFUL, you can browse ' | awk '{print $9}'", returnStdout: true
+                }
+                // Print the project key for verification
+                println "SonarQube project key: ${projectKey}"
+            }
+        }
+    }
 }
